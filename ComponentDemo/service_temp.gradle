@@ -77,6 +77,7 @@ android {
 dependencies {
     implementation "${denpendency.androidx.appcompat}"
     implementation "${denpendency.androidx.constraintlayout}"
+    implementation "${denpendency.third.arouter_api}"
     if (isComponentMode) {
         testImplementation "${denpendency.test.junit}"
         androidTestImplementation "${denpendency.test.runner}"
