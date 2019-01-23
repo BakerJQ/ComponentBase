@@ -1,4 +1,9 @@
-apply plugin: 'com.android.library'
+def isComponent = isComponentMode && isRunAlone.toBoolean()
+if (isComponent) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion versions.compileSdk
