@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply from: 'nexus_maven.gradle'
+//apply from: 'nexus_maven.gradle'
 
 android {
     compileSdkVersion versions.compileSdk

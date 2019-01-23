@@ -1,5 +1,5 @@
 apply from: "../component_build.gradle"
-apply from: 'nexus_maven.gradle'
+//apply from: 'nexus_maven.gradle'
 def isComponent = isComponentMode && isRunAlone.toBoolean()
 
 android {
