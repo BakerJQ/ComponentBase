@@ -1,6 +1,20 @@
 //apply plugin: 'com.android.library'
-apply from: "../service_temp.gradle"
 //apply from: 'nexus_maven.gradle'
+
+apply from: "../service_temp.gradle"
+def isComponent = isComponentMode && isRunAlone.toBoolean()
+
+android {
+    defaultConfig {
+        if (isComponent) {
+            applicationId "com.bakerj.component.demo.componentservice"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
 
 //android {
 //    compileSdkVersion versions.compileSdk
