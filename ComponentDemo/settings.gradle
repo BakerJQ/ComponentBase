@@ -1,0 +1,1 @@
+include ':app', ':componentbase', ':componentservice', ':component1', ':component2'

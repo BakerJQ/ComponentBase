@@ -1,0 +1,15 @@
+apply from: "../component_build.gradle"
+def isComponent = isComponentMode && isRunAlone.toBoolean()
+
+android {
+//    resourcePrefix "ModuleName_"
+    defaultConfig {
+        if (isComponent) {
+            applicationId "com.bakerj.component.demo.component2"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

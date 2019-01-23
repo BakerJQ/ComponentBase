@@ -1,0 +1,25 @@
+apply from: "../component_build.gradle"
+apply from: 'nexus_maven.gradle'
+def isComponent = isComponentMode && isRunAlone.toBoolean()
+
+android {
+//    resourcePrefix "component1_"
+    defaultConfig {
+        if (isComponent) {
+            applicationId "com.bakerj.component.demo.component1"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+task makeJar(type: Copy){
+    delete "build/libs/component1.jar"
+    from("build/intermediates/bundles/release/")
+    into("build/libs/")
+    include("classes.jar")
+    rename("classes.jar","component1.jar")
+}
+makeJar.dependsOn(build)

@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+apply from: 'nexus_maven.gradle'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+    }
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion "${versions.supportLibrary}"
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "${denpendency.androidx.appcompat}"
+    api "${denpendency.third.arouter_api}"
+    api "${denpendency.third.arouter_annotation}"
+    testImplementation "${denpendency.test.junit}"
+    androidTestImplementation "${denpendency.test.runner}"
+    androidTestImplementation "${denpendency.test.espresso}"
+}

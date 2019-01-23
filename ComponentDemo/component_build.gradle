@@ -1,0 +1,92 @@
+def isComponent = isComponentMode && isRunAlone.toBoolean()
+if (isComponent) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+                includeCompileClasspath true
+            }
+        }
+    }
+
+    if (isComponent) {
+        buildTypes {
+            debug {
+                buildConfigField "boolean", "LOG", "true"
+                buildConfigField "boolean", "USE_CANARY", "true"
+                buildConfigField "boolean", "IS_COMPONENT_MODE", "${isComponent}"
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+
+            release {
+                buildConfigField "boolean", "LOG", "false"
+                buildConfigField "boolean", "USE_CANARY", "false"
+                buildConfigField "boolean", "IS_COMPONENT_MODE", "${isComponent}"
+                minifyEnabled true
+                if (isComponent) {
+                    shrinkResources true
+                }
+                zipAlignEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "ResourceType"
+        abortOnError false
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (isComponent) {
+                manifest.srcFile 'src/main/component/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    exclude 'component/**'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation "${denpendency.androidx.appcompat}"
+    implementation "${denpendency.androidx.constraintlayout}"
+    implementation project(':componentbase')
+//    implementation 'com.bakerj:componentbase:1.0.0'
+    implementation project(':componentservice')
+//    implementation 'com.bakerj:component-service:1.0.0'
+    if (isComponentMode) {
+        testImplementation "${denpendency.test.junit}"
+        androidTestImplementation "${denpendency.test.runner}"
+        androidTestImplementation "${denpendency.test.espresso}"
+        annotationProcessor "${denpendency.third.arouter_compiler}"
+    } else {
+        implementation "${denpendency.third.arouter_compiler}"
+    }
+}
