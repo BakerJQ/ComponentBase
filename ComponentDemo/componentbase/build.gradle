@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 //apply from: 'nexus_maven.gradle'
 
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.BakerJQ'
+
 android {
     compileSdkVersion versions.compileSdk
 

@@ -29,6 +29,4 @@ dependencies {
     androidTestImplementation "${denpendency.test.runner}"
     androidTestImplementation "${denpendency.test.espresso}"
     implementation "${denpendency.third.arouter_api}"
-
-    implementation project(':componentbase')
 }
