@@ -81,7 +81,7 @@ dependencies {
     implementation 'com.github.BakerJQ:ComponentBase:1.0.0'
     implementation project(':componentservice')
 //    implementation 'com.bakerj:component-service:1.0.0'
-    if (isComponentMode) {
+    if (isComponent) {
         testImplementation "${denpendency.test.junit}"
         androidTestImplementation "${denpendency.test.runner}"
         androidTestImplementation "${denpendency.test.espresso}"
