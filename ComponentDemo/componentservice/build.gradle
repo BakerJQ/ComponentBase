@@ -1,3 +1,4 @@
+//apply plugin: 'com.android.library'
 apply from: "../service_temp.gradle"
 //apply from: 'nexus_maven.gradle'
 
