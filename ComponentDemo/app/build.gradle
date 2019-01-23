@@ -41,8 +41,8 @@ dependencies {
     androidTestImplementation "${denpendency.test.runner}"
     androidTestImplementation "${denpendency.test.espresso}"
     annotationProcessor "${denpendency.third.arouter_compiler}"
-    implementation project(':componentbase')
-//    implementation 'com.bakerj:componentbase:1.0.0'
+//    implementation project(':componentbase')
+    implementation 'com.github.BakerJQ:ComponentBase:1.0.0'
     implementation project(':componentservice')
 //    implementation 'com.bakerj:component-service:1.0.0'
     implementation 'com.github.BakerJQ:MVPBase:1.0.2'

@@ -77,8 +77,8 @@ android {
 dependencies {
     implementation "${denpendency.androidx.appcompat}"
     implementation "${denpendency.androidx.constraintlayout}"
-    implementation project(':componentbase')
-//    implementation 'com.bakerj:componentbase:1.0.0'
+//    implementation project(':componentbase')
+    implementation 'com.github.BakerJQ:ComponentBase:1.0.0'
     implementation project(':componentservice')
 //    implementation 'com.bakerj:component-service:1.0.0'
     if (isComponentMode) {
